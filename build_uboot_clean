@@ -1,0 +1,13 @@
+#!/bin/sh
+
+export ARCH=arm
+export CROSS_COMPILE=arm-none-linux-gnueabi-
+export PATH=$PATH:/opt/arm-2009q3/bin
+
+echo Clean Uboot
+make mrproper
+
+# Delete unnecessary files
+echo "Delete unnecessary files ..."
+rm -rf build.out
+

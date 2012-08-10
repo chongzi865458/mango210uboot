@@ -1,0 +1,42 @@
+#!/bin/sh
+
+export ARCH=arm
+export CROSS_COMPILE=arm-none-linux-gnueabi-
+export PATH=/usr/local/arm-2009q3/bin:$PATH
+
+INSTALL_BINDIR=/home/chongzi/m210_ics404_120703/fastboot_image_ICS
+UBOOT_IMAGE=u-boot.bin
+ 
+{
+CPU_JOB_NUM=$(grep processor /proc/cpuinfo | awk '{field=$NF};END{print field+2}')
+START_TIME=`date +%s`
+
+mkdir -p ../image
+
+echo make mrproper
+#make mrproper
+
+echo make mango210_config
+make mango210_config
+
+echo make -j$CPU_JOB_NUM
+echo
+make -j$CPU_JOB_NUM
+if [ $? != 0 ] ; then
+	exit $?
+fi
+
+echo cp -a $UBOOT_IMAGE ../image/
+cp -a $UBOOT_IMAGE ../image/
+
+if [ $INSTALL_BINDIR ]
+then
+echo cp -a $UBOOT_IMAGE $INSTALL_BINDIR/$UBOOT_IMAGE
+cp -a $UBOOT_IMAGE $INSTALL_BINDIR/$UBOOT_IMAGE
+fi
+
+END_TIME=`date +%s`
+
+echo "Total compile time is $((($END_TIME-$START_TIME)/60)) minutes $((($END_TIME-$START_TIME)%60)) seconds"
+
+} 2>&1 | tee build.out

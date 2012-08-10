@@ -1,0 +1,1057 @@
+make mrproper
+make mango210_config
+Configuring for mango210 board...
+make -j3
+
+Generating include/autoconf.mk.dep
+Generating include/autoconf.mk
+for dir in tools examples api_examples ; do make -C $dir _depend ; done
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/tools'
+make[1]: Nothing to be done for `_depend'.
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/tools'
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/examples'
+make[1]: Nothing to be done for `_depend'.
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/examples'
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/api_examples'
+make[1]: Nothing to be done for `_depend'.
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/api_examples'
+make -C tools all
+make -C examples all
+make -C api_examples all
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/tools'
+gcc -g -Wall -idirafter /home/jhk/android/mango210/uboot/include -idirafter /home/jhk/android/mango210/uboot/include2 -idirafter /home/jhk/android/mango210/uboot/include -DTEXT_BASE=0x2fd00000 -DUSE_HOSTCC -O -c -o mkimage.o mkimage.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/examples'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o hello_world.o hello_world.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/api_examples'
+arm-none-linux-gnueabi-ar crv libglue.a 
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/api_examples'
+make -C cpu/s5pc11x start.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o stubs.o stubs.c
+arm-none-linux-gnueabi-ar crv libstubs.a stubs.o
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/cpu/s5pc11x'
+arm-none-linux-gnueabi-gcc  -D__ASSEMBLY__ -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -c -o start.o start.S
+r - stubs.o
+arm-none-linux-gnueabi-ld -g  -Ttext 0x21000000 \
+			-o hello_world -e hello_world hello_world.o libstubs.a \
+			-L/usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2 -lgcc
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/cpu/s5pc11x'
+make -C lib_generic/
+arm-none-linux-gnueabi-objcopy -O srec hello_world hello_world.srec 2>/dev/null
+arm-none-linux-gnueabi-objcopy -O binary hello_world hello_world.bin 2>/dev/null
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/examples'
+make -C cpu/s5pc11x/
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/lib_generic'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o bzlib.o bzlib.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o bzlib_crctable.o bzlib_crctable.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/cpu/s5pc11x'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o nand_cp.o nand_cp.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o bzlib_decompress.o bzlib_decompress.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o serial.o serial.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o bzlib_randtable.o bzlib_randtable.c
+serial.c: In function 'serial_setbrg':
+serial.c:43: warning: unused variable 'gd'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o usb_ohci.o usb_ohci.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o bzlib_huffman.o bzlib_huffman.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o crc32.o crc32.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o interrupts.o interrupts.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o display_options.o display_options.c
+gcc -g -Wall -idirafter /home/jhk/android/mango210/uboot/include -idirafter /home/jhk/android/mango210/uboot/include2 -idirafter /home/jhk/android/mango210/uboot/include -DTEXT_BASE=0x2fd00000 -DUSE_HOSTCC -O -c -o image.o image.c
+interrupts.c: In function 'interrupt_init':
+interrupts.c:192: warning: implicit declaration of function 'get_PCLK'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cpu.o cpu.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o lmb.o lmb.c
+cpu.c: In function 'cleanup_before_linux':
+cpu.c:119: warning: implicit declaration of function 'arm_cache_flush'
+cpu.c: In function 'cpu_mmc_init':
+cpu.c:235: warning: implicit declaration of function 'setup_hsmmc_clock'
+cpu.c:236: warning: implicit declaration of function 'setup_hsmmc_cfg_gpio'
+cpu.c:237: warning: implicit declaration of function 'smdk_s3c_hsmmc_init'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o sha1.o sha1.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o nand.o nand.c
+nand.c: In function 's3c_nand_write_page_8bit':
+nand.c:666: warning: initialization discards qualifiers from pointer target type
+nand.c:659: warning: unused variable 'nfreg'
+nand.c: In function 's3c_nand_read_page_8bit':
+nand.c:689: warning: unused variable 'nfreg'
+nand.c: In function 's3c_nand_read_oob_8bit':
+nand.c:728: warning: unused variable 'secc_start'
+nand.c: In function 's3c_nand_write_oob_8bit':
+nand.c:743: warning: unused variable 'secc_start'
+nand.c: At top level:
+nand.c:78: warning: 's3c_nand_oob_128' defined but not used
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o vsprintf.o vsprintf.c
+gcc -g -Wall -pedantic -idirafter /home/jhk/android/mango210/uboot/include -idirafter /home/jhk/android/mango210/uboot/include2 -idirafter /home/jhk/android/mango210/uboot/include -DTEXT_BASE=0x2fd00000 -DUSE_HOSTCC -O -c -o envcrc.o envcrc.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o onenand_cp.o onenand_cp.c
+arm-none-linux-gnueabi-ar crv libgeneric.a bzlib.o bzlib_crctable.o bzlib_decompress.o bzlib_randtable.o bzlib_huffman.o crc32.o ctype.o display_options.o div64.o lmb.o ldiv.o sha1.o string.o vsprintf.o zlib.o
+gcc -g  -idirafter /home/jhk/android/mango210/uboot/include -idirafter /home/jhk/android/mango210/uboot/include2 -idirafter /home/jhk/android/mango210/uboot/include -DTEXT_BASE=0x2fd00000 -DUSE_HOSTCC -c -o environment.o environment.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o usbd-otg-hs.o usbd-otg-hs.c
+r - bzlib.o
+r - bzlib_crctable.o
+r - bzlib_decompress.o
+r - bzlib_randtable.o
+r - bzlib_huffman.o
+r - crc32.o
+r - ctype.o
+r - display_options.o
+r - div64.o
+r - lmb.o
+r - ldiv.o
+r - sha1.o
+r - string.o
+r - vsprintf.o
+r - zlib.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/lib_generic'
+make -C cpu/s5pc11x/s5pc110/
+gcc -g -Wall -pedantic -idirafter /home/jhk/android/mango210/uboot/include -idirafter /home/jhk/android/mango210/uboot/include2 -idirafter /home/jhk/android/mango210/uboot/include -DTEXT_BASE=0x2fd00000 -DUSE_HOSTCC -O -c -o ubsha1.o ubsha1.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/cpu/s5pc11x/s5pc110'
+arm-none-linux-gnueabi-gcc  -D__ASSEMBLY__ -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -c -o cpu_init.o cpu_init.S
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o speed.o speed.c
+gcc -Wall -pedantic -idirafter /home/jhk/android/mango210/uboot/include -idirafter /home/jhk/android/mango210/uboot/include2 -idirafter /home/jhk/android/mango210/uboot/include -DTEXT_BASE=0x2fd00000 -DUSE_HOSTCC -O  -o mkimage mkimage.o crc32.o image.o md5.o sha1.o fdt.o fdt_ro.o fdt_rw.o fdt_strerror.o fdt_wip.o
+arm-none-linux-gnueabi-ar crv libs5pc110.a cpu_init.o speed.o
+r - cpu_init.o
+r - speed.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/cpu/s5pc11x/s5pc110'
+gcc -Wall -pedantic -idirafter /home/jhk/android/mango210/uboot/include -idirafter /home/jhk/android/mango210/uboot/include2 -idirafter /home/jhk/android/mango210/uboot/include -DTEXT_BASE=0x2fd00000 -DUSE_HOSTCC -O -o envcrc envcrc.o crc32.o environment.o sha1.o
+strip mkimage
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o movi.o movi.c
+gcc -Wall -pedantic -idirafter /home/jhk/android/mango210/uboot/include -idirafter /home/jhk/android/mango210/uboot/include2 -idirafter /home/jhk/android/mango210/uboot/include -DTEXT_BASE=0x2fd00000 -DUSE_HOSTCC -O -o ubsha1 ubsha1.o sha1.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o setup_hsmmc.o setup_hsmmc.c
+movi.c: In function 'movi_bl2_copy':
+movi.c:49: warning: passing argument 4 of 'copy_bl2' makes pointer from integer without a cast
+movi.c:73: warning: passing argument 4 of 'copy_bl2' makes pointer from integer without a cast
+movi.c: In function 'movi_zImage_copy':
+movi.c:122: warning: passing argument 4 of 'copy_zImage' makes pointer from integer without a cast
+movi.c: In function 'movi_write_env':
+movi.c:139: warning: implicit declaration of function 'movi_write'
+movi.c: In function 'movi_read_env':
+movi.c:145: warning: implicit declaration of function 'movi_read'
+movi.c: In function 'movi_write_bl1':
+movi.c:162: warning: format '%x' expects type 'unsigned int', but argument 2 has type 'ulong'
+movi.c:154: warning: unused variable 'tmp'
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/tools'
+make -C lib_arm/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o setup_ide.o setup_ide.c
+setup_hsmmc.c: In function 'setup_hsmmc_clock':
+setup_hsmmc.c:19: warning: implicit declaration of function 'get_MPLL_CLK'
+make -C fs/cramfs/
+setup_ide.c:35:1: warning: "ATA_COMMAND" redefined
+In file included from setup_ide.c:25:
+/home/jhk/android/mango210/uboot/include/ata.h:58:1: warning: this is the location of the previous definition
+setup_ide.c: In function 'ide_preinit':
+setup_ide.c:67: warning: unused variable 'tmp'
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/lib_arm'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o board.o board.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o fastboot.o fastboot.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/fs/cramfs'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cramfs.o cramfs.c
+fastboot.c: In function 'fboot_usb_int_bulkin':
+fastboot.c:1699: warning: passing argument 1 of 'fboot_usb_write_in_fifo' discards qualifiers from pointer target type
+fastboot.c:1684: warning: unused variable 'DIEPCTL_IN'
+fastboot.c:1683: warning: unused variable 'remain_cnt'
+fastboot.c:1682: warning: unused variable 'bulkin_buf'
+fastboot.c: In function 'fboot_usb_int_bulkout':
+fastboot.c:1922: warning: pointer targets in passing argument 1 of 'sprintf' differ in signedness
+fastboot.c:1922: warning: embedded '\0' in format
+fastboot.c: In function 'fboot_usb_transfer':
+fastboot.c:2357: warning: unused variable 'tmp'
+fastboot.c:2356: warning: unused variable 'DIEPINT_IN'
+fastboot.c:2355: warning: unused variable 'DIEPCTL_IN'
+fastboot.c: In function 'fboot_usb_int_hndlr':
+fastboot.c:2437: warning: unused variable 'val'
+fastboot.c: In function 'fastboot_init':
+fastboot.c:2591: warning: unused variable 'devctl'
+fastboot.c: In function 'fastboot_poll':
+fastboot.c:2661: warning: unused variable 'intrrx'
+fastboot.c:2660: warning: unused variable 'intrtx'
+fastboot.c: In function 'fastboot_tx_status':
+fastboot.c:2692: warning: unused variable 'i'
+fastboot.c:2691: warning: unused variable 'ret'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o uncompress.o uncompress.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o bootm.o bootm.c
+arm-none-linux-gnueabi-ar crv libcramfs.a cramfs.o uncompress.o
+bootm.c: In function 'do_bootm_linux':
+bootm.c:140: warning: implicit declaration of function 'setup_mtdpartition_tag'
+bootm.c: At top level:
+bootm.c:308: warning: function declaration isn't a prototype
+bootm.c:307: warning: conflicting types for 'setup_mtdpartition_tag'
+bootm.c:140: warning: previous implicit declaration of 'setup_mtdpartition_tag' was here
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cache.o cache.c
+r - cramfs.o
+r - uncompress.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/fs/cramfs'
+make -C fs/fat/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o interrupts.o interrupts.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o fimd.o fimd.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/fs/fat'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o fat.o fat.c
+fimd.c: In function 'LCD_Initialize_LB070WV6':
+fimd.c:480: warning: implicit declaration of function 'LCD_setprogress'
+fimd.c:475: warning: unused variable 'pBuffer'
+fimd.c:474: warning: unused variable 'i'
+fimd.c: At top level:
+fimd.c:592: warning: conflicting types for 'LCD_setprogress'
+fimd.c:480: warning: previous implicit declaration of 'LCD_setprogress' was here
+arm-none-linux-gnueabi-ar crv libs5pc11x.a nand_cp.o serial.o  usb_ohci.o interrupts.o cpu.o nand.o onenand.o onenand_cp.o usbd-otg-hs.o movi.o setup_hsmmc.o setup_ide.o fastboot.o fimd.o pmic.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o rbtree.o rbtree.c
+In file included from fat.c:36:
+/home/jhk/android/mango210/uboot/include/fat.h:195: warning: function declaration isn't a prototype
+fat.c: In function 'fat_register_device':
+fat.c:131: warning: format '%x' expects type 'unsigned int', but argument 3 has type 'ulong'
+fat.c:131: warning: format '%x' expects type 'unsigned int', but argument 4 has type 'ulong'
+fat.c: In function 'write_pbr':
+fat.c:157: warning: implicit declaration of function 'malloc'
+fat.c:157: warning: assignment makes pointer from integer without a cast
+fat.c:241: warning: format '%x' expects type 'unsigned int', but argument 2 has type 'long unsigned int'
+fat.c:153: warning: unused variable 'reserved_cnt'
+fat.c: In function 'write_reserved':
+fat.c:283: warning: assignment makes pointer from integer without a cast
+fat.c:282: warning: unused variable 'i'
+fat.c: In function 'write_fat':
+fat.c:325: warning: assignment makes pointer from integer without a cast
+fat.c:333: warning: assignment makes pointer from integer without a cast
+fat.c:342: warning: unused variable 'temp'
+fat.c: In function 'mklabel':
+fat.c:389: warning: implicit declaration of function '__toupper'
+fat.c: In function 'fat_format_device':
+fat.c:437: warning: format '%x' expects type 'unsigned int', but argument 3 has type 'ulong'
+fat.c:437: warning: format '%x' expects type 'unsigned int', but argument 4 has type 'ulong'
+fat.c: At top level:
+fat.c:385: warning: 'mklabel' defined but not used
+r - nand_cp.o
+r - serial.o
+r - usb_ohci.o
+r - interrupts.o
+r - cpu.o
+r - nand.o
+r - onenand.o
+r - onenand_cp.o
+r - usbd-otg-hs.o
+r - movi.o
+r - setup_hsmmc.o
+r - setup_ide.o
+r - fastboot.o
+r - fimd.o
+r - pmic.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/cpu/s5pc11x'
+make -C fs/fdos/
+fat.c: In function 'read_bootsectandvi':
+fat.c:1033: warning: array subscript is above array bounds
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/fs/fdos'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o fat.o fat.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o vfat.o vfat.c
+arm-none-linux-gnueabi-ar crv libarm.a _ashldi3.o _ashrdi3.o _divsi3.o _modsi3.o _udivsi3.o _umodsi3.o board.o bootm.o cache.o div0.o interrupts.o rbtree.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o dev.o dev.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o file.o file.c
+r - _ashldi3.o
+r - _ashrdi3.o
+r - _divsi3.o
+r - _modsi3.o
+r - _udivsi3.o
+r - _umodsi3.o
+r - board.o
+r - bootm.o
+r - cache.o
+r - div0.o
+r - interrupts.o
+r - rbtree.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/lib_arm'
+make -C fs/jffs2/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o fdos.o fdos.c
+In file included from file.c:31:
+/home/jhk/android/mango210/uboot/include/fat.h:195: warning: function declaration isn't a prototype
+arm-none-linux-gnueabi-ar crv libfat.a fat.o file.o
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/fs/jffs2'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o jffs2_1pass.o jffs2_1pass.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o fs.o fs.c
+r - fat.o
+r - file.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/fs/fat'
+make -C fs/reiserfs/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o compr_rtime.o compr_rtime.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o subdir.o subdir.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o compr_rubin.o compr_rubin.c
+arm-none-linux-gnueabi-ar crv libfdos.a fat.o vfat.o dev.o fdos.o fs.o subdir.o
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/fs/reiserfs'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o reiserfs.o reiserfs.c
+r - fat.o
+r - vfat.o
+r - dev.o
+r - fdos.o
+r - fs.o
+r - subdir.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/fs/fdos'
+make -C fs/ext2/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o compr_zlib.o compr_zlib.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o dev.o dev.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mini_inflate.o mini_inflate.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/fs/ext2'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ext2fs.o ext2fs.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mode_string.o mode_string.c
+ext2fs.c: In function 'ext2fs_format':
+ext2fs.c:1051: warning: format '%x' expects type 'unsigned int', but argument 3 has type 'ulong'
+ext2fs.c:1051: warning: format '%x' expects type 'unsigned int', but argument 4 has type 'ulong'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o compr_lzo.o compr_lzo.c
+ext2fs.c:1561: warning: assignment from incompatible pointer type
+ext2fs.c:1585: warning: assignment from incompatible pointer type
+ext2fs.c:1598: warning: assignment from incompatible pointer type
+ext2fs.c:1647: warning: assignment from incompatible pointer type
+ext2fs.c:1652: warning: assignment from incompatible pointer type
+ext2fs.c:1700: warning: assignment from incompatible pointer type
+ext2fs.c:1706: warning: assignment from incompatible pointer type
+ext2fs.c:1792: warning: assignment from incompatible pointer type
+ext2fs.c:1836: warning: assignment from incompatible pointer type
+ext2fs.c:1971: warning: format '%x' expects type 'unsigned int', but argument 2 has type 'long unsigned int'
+ext2fs.c:1984: warning: assignment from incompatible pointer type
+ext2fs.c:1241: warning: unused variable 'default_used_blk'
+ext2fs.c:1240: warning: unused variable 'normal_used_blk'
+arm-none-linux-gnueabi-ar crv libreiserfs.a reiserfs.o dev.o mode_string.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o compr_lzari.o compr_lzari.c
+r - reiserfs.o
+r - dev.o
+r - mode_string.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/fs/reiserfs'
+make -C net/
+ext2fs.c:1060: warning: 'uuid[0]' may be used uninitialized in this function
+ext2fs.c:1060: warning: 'uuid[1]' may be used uninitialized in this function
+ext2fs.c:1060: warning: 'uuid[2]' may be used uninitialized in this function
+ext2fs.c:1060: warning: 'uuid[3]' may be used uninitialized in this function
+ext2fs.c:1841: warning: 'temp_val' may be used uninitialized in this function
+ext2fs.c:1434: warning: 'temp_val' may be used uninitialized in this function
+arm-none-linux-gnueabi-ar crv libjffs2.a jffs2_1pass.o compr_rtime.o compr_rubin.o compr_zlib.o mini_inflate.o compr_lzo.o compr_lzari.o
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/net'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o net.o net.c
+r - jffs2_1pass.o
+r - compr_rtime.o
+r - compr_rubin.o
+r - compr_zlib.o
+r - mini_inflate.o
+r - compr_lzo.o
+r - compr_lzari.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/fs/jffs2'
+make -C disk/
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/disk'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o part.o part.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o tftp.o tftp.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o dev.o dev.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o part_mac.o part_mac.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o bootp.o bootp.c
+arm-none-linux-gnueabi-ar crv libext2fs.a ext2fs.o dev.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o part_dos.o part_dos.c
+r - ext2fs.o
+r - dev.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/fs/ext2'
+make -C drivers/bios_emulator/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o rarp.o rarp.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o part_iso.o part_iso.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o eth.o eth.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/bios_emulator'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -I./include -I/home/jhk/android/mango210/uboot/include -D__PPC__  -D__BIG_ENDIAN__ -c -o atibios.o atibios.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o part_amiga.o part_amiga.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -I./include -I/home/jhk/android/mango210/uboot/include -D__PPC__  -D__BIG_ENDIAN__ -c -o biosemu.o biosemu.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o nfs.o nfs.c
+arm-none-linux-gnueabi-ar crv libdisk.a part.o part_mac.o part_dos.o part_iso.o part_amiga.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -I./include -I/home/jhk/android/mango210/uboot/include -D__PPC__  -D__BIG_ENDIAN__ -c -o besys.o besys.c
+r - part.o
+r - part_mac.o
+r - part_dos.o
+r - part_iso.o
+r - part_amiga.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/disk'
+make -C drivers/block/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -I./include -I/home/jhk/android/mango210/uboot/include -D__PPC__  -D__BIG_ENDIAN__ -c -o bios.o bios.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o sntp.o sntp.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/block'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ahci.o ahci.c
+arm-none-linux-gnueabi-ar crv libatibiosemu.a atibios.o biosemu.o besys.o bios.o x86emu/decode.o x86emu/ops2.o x86emu/ops.o x86emu/prim_ops.o x86emu/sys.o x86emu/debug.o
+arm-none-linux-gnueabi-ar crv libnet.a net.o tftp.o bootp.o rarp.o eth.o nfs.o sntp.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ata_piix.o ata_piix.c
+r - atibios.o
+r - biosemu.o
+r - besys.o
+r - bios.o
+r - x86emu/decode.o
+r - x86emu/ops2.o
+r - x86emu/ops.o
+r - x86emu/prim_ops.o
+r - x86emu/sys.o
+r - x86emu/debug.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/bios_emulator'
+make -C drivers/dma/
+r - net.o
+r - tftp.o
+r - bootp.o
+r - rarp.o
+r - eth.o
+r - nfs.o
+r - sntp.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/net'
+make -C drivers/hwmon/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o sil680.o sil680.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/dma'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o MCD_tasksInit.o MCD_tasksInit.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/hwmon'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o sym53c8xx.o sym53c8xx.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o MCD_dmaApi.o MCD_dmaApi.c
+arm-none-linux-gnueabi-ar crv libhwmon.a 
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o systemace.o systemace.c
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/hwmon'
+make -C drivers/i2c/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o MCD_tasks.o MCD_tasks.c
+arm-none-linux-gnueabi-ar crv libblock.a ahci.o ata_piix.o sil680.o sym53c8xx.o systemace.o
+arm-none-linux-gnueabi-ar crv libdma.a MCD_tasksInit.o MCD_dmaApi.o MCD_tasks.o
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/i2c'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o fsl_i2c.o fsl_i2c.c
+r - ahci.o
+r - ata_piix.o
+r - sil680.o
+r - sym53c8xx.o
+r - systemace.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/block'
+make -C drivers/input/
+r - MCD_tasksInit.o
+r - MCD_dmaApi.o
+r - MCD_tasks.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/dma'
+make -C drivers/misc/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o omap1510_i2c.o omap1510_i2c.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/input'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o i8042.o i8042.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/misc'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ali512x.o ali512x.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o omap24xx_i2c.o omap24xx_i2c.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o keyboard.o keyboard.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ns87308.o ns87308.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o tsi108_i2c.o tsi108_i2c.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o pc_keyb.o pc_keyb.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o status_led.o status_led.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mxc_i2c.o mxc_i2c.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ps2ser.o ps2ser.c
+arm-none-linux-gnueabi-ar crv libmisc.a ali512x.o ns87308.o status_led.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ps2mult.o ps2mult.c
+r - ali512x.o
+r - ns87308.o
+r - status_led.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/misc'
+make -C drivers/mmc/
+arm-none-linux-gnueabi-ar crv libi2c.a fsl_i2c.o omap1510_i2c.o omap24xx_i2c.o tsi108_i2c.o mxc_i2c.o
+r - fsl_i2c.o
+r - omap1510_i2c.o
+r - omap24xx_i2c.o
+r - tsi108_i2c.o
+r - mxc_i2c.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/i2c'
+make -C drivers/mtd/
+arm-none-linux-gnueabi-ar crv libinput.a i8042.o keyboard.o pc_keyb.o ps2ser.o ps2mult.o
+r - i8042.o
+r - keyboard.o
+r - pc_keyb.o
+r - ps2ser.o
+r - ps2mult.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/input'
+make -C drivers/mtd/nand/
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/mmc'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mmc.o mmc.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/mtd'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mtdcore.o mtdcore.c
+In file included from /home/jhk/android/mango210/uboot/include/common.h:111,
+                 from /home/jhk/android/mango210/uboot/include/ubi_uboot.h:17,
+                 from mtdcore.c:12:
+/home/jhk/android/mango210/uboot/include/flash.h:26:1: warning: "DEBUG" redefined
+In file included from mtdcore.c:10:
+/home/jhk/android/mango210/uboot/include/linux/mtd/mtd.h:306:1: warning: this is the location of the previous definition
+In file included from /home/jhk/android/mango210/uboot/include/ubi_uboot.h:17,
+                 from mtdcore.c:12:
+/home/jhk/android/mango210/uboot/include/common.h:122:1: warning: "BUG" redefined
+In file included from /home/jhk/android/mango210/uboot/include/linux/mtd/mtd-abi.h:11,
+                 from /home/jhk/android/mango210/uboot/include/linux/mtd/mtd.h:14,
+                 from mtdcore.c:10:
+/home/jhk/android/mango210/uboot/include/linux/mtd/compat.h:44:1: warning: this is the location of the previous definition
+In file included from /home/jhk/android/mango210/uboot/include/ubi_uboot.h:17,
+                 from mtdcore.c:12:
+/home/jhk/android/mango210/uboot/include/common.h:126:1: warning: "BUG_ON" redefined
+In file included from /home/jhk/android/mango210/uboot/include/linux/mtd/mtd-abi.h:11,
+                 from /home/jhk/android/mango210/uboot/include/linux/mtd/mtd.h:14,
+                 from mtdcore.c:10:
+/home/jhk/android/mango210/uboot/include/linux/mtd/compat.h:48:1: warning: this is the location of the previous definition
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/mtd/nand'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o nand.o nand.c
+mmc.c: In function 'mmc_initialize':
+mmc.c:1182: warning: format '%ld' expects type 'long int', but argument 2 has type 'u32'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mtdpart.o mtdpart.c
+nand.c: In function 'nand_init_chip':
+nand.c:62: warning: assignment discards qualifiers from pointer target type
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o nand_base.o nand_base.c
+mtdpart.c: In function 'add_one_partition':
+mtdpart.c:351: warning: assignment from incompatible pointer type
+mtdpart.c:353: warning: assignment from incompatible pointer type
+mtdpart.c:372: warning: format '%08x' expects type 'unsigned int', but argument 3 has type 'long unsigned int'
+mtdpart.c:372: warning: format '%08x' expects type 'unsigned int', but argument 4 has type 'long unsigned int'
+mtdpart.c:379: warning: format '%08x' expects type 'unsigned int', but argument 2 has type 'long unsigned int'
+mtdpart.c:379: warning: format '%08x' expects type 'unsigned int', but argument 3 has type 'long unsigned int'
+mtdpart.c:393: warning: format '%#x' expects type 'unsigned int', but argument 4 has type 'long unsigned int'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o s3c_hsmmc.o s3c_hsmmc.c
+s3c_hsmmc.c: In function 's3c_hsmmc_set_ios':
+s3c_hsmmc.c:319: warning: implicit declaration of function 'setup_sdhci0_cfg_card'
+nand_base.c: In function 'nand_write':
+nand_base.c:1942: warning: assignment discards qualifiers from pointer target type
+nand_base.c: In function 'nand_release':
+nand_base.c:2881: warning: implicit declaration of function 'del_mtd_partitions'
+arm-none-linux-gnueabi-ar crv libmmc.a mmc.o s3c_hsmmc.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mtdconcat.o mtdconcat.c
+r - mmc.o
+r - s3c_hsmmc.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/mmc'
+make -C drivers/mtd/nand_legacy/
+In file included from /home/jhk/android/mango210/uboot/include/common.h:111,
+                 from /home/jhk/android/mango210/uboot/include/ubi_uboot.h:17,
+                 from mtdconcat.c:14:
+/home/jhk/android/mango210/uboot/include/flash.h:26:1: warning: "DEBUG" redefined
+In file included from mtdconcat.c:11:
+/home/jhk/android/mango210/uboot/include/linux/mtd/mtd.h:306:1: warning: this is the location of the previous definition
+In file included from /home/jhk/android/mango210/uboot/include/ubi_uboot.h:17,
+                 from mtdconcat.c:14:
+/home/jhk/android/mango210/uboot/include/common.h:122:1: warning: "BUG" redefined
+In file included from /home/jhk/android/mango210/uboot/include/linux/mtd/mtd-abi.h:11,
+                 from /home/jhk/android/mango210/uboot/include/linux/mtd/mtd.h:14,
+                 from mtdconcat.c:11:
+/home/jhk/android/mango210/uboot/include/linux/mtd/compat.h:44:1: warning: this is the location of the previous definition
+In file included from /home/jhk/android/mango210/uboot/include/ubi_uboot.h:17,
+                 from mtdconcat.c:14:
+/home/jhk/android/mango210/uboot/include/common.h:126:1: warning: "BUG_ON" redefined
+In file included from /home/jhk/android/mango210/uboot/include/linux/mtd/mtd-abi.h:11,
+                 from /home/jhk/android/mango210/uboot/include/linux/mtd/mtd.h:14,
+                 from mtdconcat.c:11:
+/home/jhk/android/mango210/uboot/include/linux/mtd/compat.h:48:1: warning: this is the location of the previous definition
+mtdconcat.c: In function 'mtd_concat_create':
+mtdconcat.c:670: warning: assignment discards qualifiers from pointer target type
+mtdconcat.c:676: warning: assignment from incompatible pointer type
+mtdconcat.c:677: warning: assignment from incompatible pointer type
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/mtd/nand_legacy'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o nand_legacy.o nand_legacy.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mw_eeprom.o mw_eeprom.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o nand_ids.o nand_ids.c
+arm-none-linux-gnueabi-ar crv libnand_legacy.a nand_legacy.o
+arm-none-linux-gnueabi-ar crv libmtd.a mtdcore.o mtdpart.o mtdconcat.o mw_eeprom.o
+r - nand_legacy.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/mtd/nand_legacy'
+make -C drivers/mtd/onenand/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o nand_ecc.o nand_ecc.c
+r - mtdcore.o
+r - mtdpart.o
+r - mtdconcat.o
+r - mw_eeprom.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/mtd'
+make -C drivers/mtd/ubi/
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/mtd/onenand'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o onenand_uboot.o onenand_uboot.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o nand_bbt.o nand_bbt.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/mtd/ubi'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o build.o build.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o onenand_base.o onenand_base.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o onenand_bbt.o onenand_bbt.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o nand_util.o nand_util.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o vtbl.o vtbl.c
+arm-none-linux-gnueabi-ar crv libonenand.a onenand_uboot.o onenand_base.o onenand_bbt.o
+r - onenand_uboot.o
+r - onenand_base.o
+r - onenand_bbt.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/mtd/onenand'
+make -C drivers/mtd/spi/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o fsl_upm.o fsl_upm.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o vmt.o vmt.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/mtd/spi'
+arm-none-linux-gnueabi-ar crv libnand.a nand.o nand_base.o nand_ids.o nand_ecc.o nand_bbt.o nand_util.o fsl_upm.o
+arm-none-linux-gnueabi-ar crv libspi_flash.a 
+r - nand.o
+r - nand_base.o
+r - nand_ids.o
+r - nand_ecc.o
+r - nand_bbt.o
+r - nand_util.o
+r - fsl_upm.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/mtd/nand'
+make -C drivers/net/
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/mtd/spi'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o upd.o upd.c
+make -C drivers/net/sk98lin/
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/net'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o smc911x.o smc911x.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o kapi.o kapi.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/net/sk98lin'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o skge.o skge.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o skaddr.o skaddr.c
+arm-none-linux-gnueabi-ar crv libnet.a smc911x.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o skgehwt.o skgehwt.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o eba.o eba.c
+r - smc911x.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/net'
+make -C drivers/pci/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o skgeinit.o skgeinit.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o skgepnmi.o skgepnmi.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o skgesirq.o skgesirq.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/pci'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o fsl_pci_init.o fsl_pci_init.c
+eba.c: In function 'ubi_eba_read_leb':
+eba.c:394: warning: 'crc' may be used uninitialized in this function
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o pci.o pci.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o ski2c.o ski2c.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o io.o io.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o sklm80.o sklm80.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o pci_auto.o pci_auto.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o skqueue.o skqueue.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o pci_indirect.o pci_indirect.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o skrlmt.o skrlmt.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o wl.o wl.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o sktimer.o sktimer.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o tsi108_pci.o tsi108_pci.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o skvpd.o skvpd.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o w83c553f.o w83c553f.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o skxmac2.o skxmac2.c
+arm-none-linux-gnueabi-ar crv libpci.a fsl_pci_init.o pci.o pci_auto.o pci_indirect.o tsi108_pci.o w83c553f.o
+wl.c: In function 'wear_leveling_worker':
+wl.c:755: warning: 'pe' may be used uninitialized in this function
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o skcsum.o skcsum.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o scan.o scan.c
+r - fsl_pci_init.o
+r - pci.o
+r - pci_auto.o
+r - pci_indirect.o
+r - tsi108_pci.o
+r - w83c553f.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/pci'
+make -C drivers/pcmcia/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o uboot_skb.o uboot_skb.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -I. -DSK_USE_CSUM  -c -o uboot_drv.o uboot_drv.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/pcmcia'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mpc8xx_pcmcia.o mpc8xx_pcmcia.c
+arm-none-linux-gnueabi-ar crv libsk98lin.a skge.o skaddr.o skgehwt.o skgeinit.o skgepnmi.o skgesirq.o ski2c.o sklm80.o skqueue.o skrlmt.o sktimer.o skvpd.o skxmac2.o skcsum.o uboot_skb.o uboot_drv.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o rpx_pcmcia.o rpx_pcmcia.c
+r - skge.o
+r - skaddr.o
+r - skgehwt.o
+r - skgeinit.o
+r - skgepnmi.o
+r - skgesirq.o
+r - ski2c.o
+r - sklm80.o
+r - skqueue.o
+r - skrlmt.o
+r - sktimer.o
+r - skvpd.o
+r - skxmac2.o
+r - skcsum.o
+r - uboot_skb.o
+r - uboot_drv.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/net/sk98lin'
+make -C drivers/spi/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o misc.o misc.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o tqm8xx_pcmcia.o tqm8xx_pcmcia.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o debug.o debug.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/spi'
+arm-none-linux-gnueabi-ar crv libpcmcia.a mpc8xx_pcmcia.o rpx_pcmcia.o tqm8xx_pcmcia.o
+arm-none-linux-gnueabi-ar crv libspi.a 
+arm-none-linux-gnueabi-ar crv libubi.a build.o vtbl.o vmt.o upd.o kapi.o eba.o io.o wl.o scan.o crc32.o misc.o debug.o
+r - mpc8xx_pcmcia.o
+r - rpx_pcmcia.o
+r - tqm8xx_pcmcia.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/pcmcia'
+make -C drivers/rtc/
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/spi'
+make -C drivers/serial/
+r - build.o
+r - vtbl.o
+r - vmt.o
+r - upd.o
+r - kapi.o
+r - eba.o
+r - io.o
+r - wl.o
+r - scan.o
+r - crc32.o
+r - misc.o
+r - debug.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/mtd/ubi'
+make -C drivers/usb/
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/rtc'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o bfin_rtc.o bfin_rtc.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/serial'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ns9750_serial.o ns9750_serial.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o date.o date.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/usb'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o isp116x-hcd.o isp116x-hcd.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ns16550.o ns16550.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ds12887.o ds12887.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o sl811_usb.o sl811_usb.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o serial.o serial.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ds1302.o ds1302.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o usb_ohci.o usb_ohci.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o serial_pl010.o serial_pl010.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ds1306.o ds1306.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o usbdcore.o usbdcore.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o serial_pl011.o serial_pl011.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ds1307.o ds1307.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o serial_sh.o serial_sh.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ds1337.o ds1337.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o usbdcore_ep0.o usbdcore_ep0.c
+arm-none-linux-gnueabi-ar crv libserial.a ns9750_serial.o ns16550.o serial.o serial_pl010.o serial_pl011.o serial_sh.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o usbdcore_mpc8xx.o usbdcore_mpc8xx.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ds1374.o ds1374.c
+r - ns9750_serial.o
+r - ns16550.o
+r - serial.o
+r - serial_pl010.o
+r - serial_pl011.o
+r - serial_sh.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/serial'
+make -C drivers/video/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ds1556.o ds1556.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o usbdcore_omap1510.o usbdcore_omap1510.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/drivers/video'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ati_radeon_fb.o ati_radeon_fb.c
+arm-none-linux-gnueabi-ar crv libusb.a isp116x-hcd.o sl811_usb.o usb_ohci.o usbdcore.o usbdcore_ep0.o usbdcore_mpc8xx.o usbdcore_omap1510.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ds164x.o ds164x.c
+r - isp116x-hcd.o
+r - sl811_usb.o
+r - usb_ohci.o
+r - usbdcore.o
+r - usbdcore_ep0.o
+r - usbdcore_mpc8xx.o
+r - usbdcore_omap1510.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/usb'
+make -C common/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cfb_console.o cfb_console.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ds174x.o ds174x.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ct69000.o ct69000.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ds3231.o ds3231.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/common'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o main.o main.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mb862xx.o mb862xx.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o m41t11.o m41t11.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o sed13806.o sed13806.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o m41t60.o m41t60.c
+main.c:1076: warning: 'delete_char' defined but not used
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o sed156x.o sed156x.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o m48t35ax.o m48t35ax.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o ACEX1K.o ACEX1K.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o max6900.o max6900.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o sm501.o sm501.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o altera.o altera.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mc146818.o mc146818.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o smiLynxEM.o smiLynxEM.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o bedbug.o bedbug.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mcfrtc.o mcfrtc.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o videomodes.o videomodes.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o circbuf.o circbuf.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mk48t59.o mk48t59.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_autoscript.o cmd_autoscript.c
+arm-none-linux-gnueabi-ar crv libvideo.a ati_radeon_fb.o cfb_console.o ct69000.o mb862xx.o sed13806.o sed156x.o sm501.o smiLynxEM.o videomodes.o
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mpc5xxx.o mpc5xxx.c
+r - ati_radeon_fb.o
+r - cfb_console.o
+r - ct69000.o
+r - mb862xx.o
+r - sed13806.o
+r - sed156x.o
+r - sm501.o
+r - smiLynxEM.o
+r - videomodes.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/video'
+make -C libfdt/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mpc8xx.o mpc8xx.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_bdinfo.o cmd_bdinfo.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/libfdt'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o pcf8563.o pcf8563.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o image.o image.c
+arm-none-linux-gnueabi-ar crv libfdt.a 
+image.c: In function 'genimg_get_format':
+image.c:643: warning: format '%x' expects type 'unsigned int', but argument 2 has type 'ulong'
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/libfdt'
+make -C api/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o rs5c372.o rs5c372.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o rx8025.o rx8025.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o gunzip.o gunzip.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o s3c24x0_rtc.o s3c24x0_rtc.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/api'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_boot.o cmd_boot.c
+arm-none-linux-gnueabi-ar crv libapi.a 
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o x1205.o x1205.c
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/api'
+make -C post/
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_bootm.o cmd_bootm.c
+arm-none-linux-gnueabi-ar crv librtc.a bfin_rtc.o date.o ds12887.o ds1302.o ds1306.o ds1307.o ds1337.o ds1374.o ds1556.o ds164x.o ds174x.o ds3231.o m41t11.o m41t60.o m48t35ax.o max6900.o mc146818.o mcfrtc.o mk48t59.o mpc5xxx.o mpc8xx.o pcf8563.o rs5c372.o rx8025.o s3c24x0_rtc.o x1205.o
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/post'
+r - bfin_rtc.o
+r - date.o
+r - ds12887.o
+r - ds1302.o
+r - ds1306.o
+r - ds1307.o
+r - ds1337.o
+r - ds1374.o
+r - ds1556.o
+r - ds164x.o
+r - ds174x.o
+r - ds3231.o
+r - m41t11.o
+r - m41t60.o
+r - m48t35ax.o
+r - max6900.o
+r - mc146818.o
+r - mcfrtc.o
+r - mk48t59.o
+r - mpc5xxx.o
+r - mpc8xx.o
+r - pcf8563.o
+r - rs5c372.o
+r - rx8025.o
+r - s3c24x0_rtc.o
+r - x1205.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/drivers/rtc'
+make -C /home/jhk/android/mango210/uboot/board/samsung/mango210/ u-boot.lds
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/post'
+cmd_bootm.c: In function 'do_bootm':
+cmd_bootm.c:135: warning: 'iflag' may be used uninitialized in this function
+cmd_bootm.c:133: warning: 'hdr' may be used uninitialized in this function
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_cache.o cmd_cache.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_console.o cmd_console.c
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/board/samsung/mango210'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_date.o cmd_date.c
+make[1]: Nothing to be done for `u-boot.lds'.
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/board/samsung/mango210'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_eeprom.o cmd_eeprom.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_elf.o cmd_elf.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_ext2.o cmd_ext2.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_fat.o cmd_fat.c
+cmd_ext2.c: In function 'do_ext2_format':
+cmd_ext2.c:304: warning: no return statement in function returning non-void
+cmd_ext2.c: In function 'do_ext3_format':
+cmd_ext2.c:316: warning: no return statement in function returning non-void
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_fdc.o cmd_fdc.c
+In file included from cmd_fat.c:37:
+/home/jhk/android/mango210/uboot/include/fat.h:195: warning: function declaration isn't a prototype
+cmd_fat.c: In function 'do_fat_fsload':
+cmd_fat.c:59: warning: implicit declaration of function 'find_mmc_device'
+cmd_fat.c:59: warning: assignment makes pointer from integer without a cast
+cmd_fat.c:60: warning: implicit declaration of function 'mmc_init'
+cmd_fat.c: In function 'do_fat_fsinfo':
+cmd_fat.c:189: warning: too many arguments for format
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_itest.o cmd_itest.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_load.o cmd_load.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_mem.o cmd_mem.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_misc.o cmd_misc.c
+cmd_mem.c: In function 'do_mem_test':
+cmd_mem.c:1227: warning: format '%x' expects type 'unsigned int', but argument 2 has type 'ulong *'
+cmd_mem.c:1227: warning: format '%x' expects type 'unsigned int', but argument 3 has type 'ulong *'
+cmd_mem.c:1237: warning: format '%x' expects type 'unsigned int', but argument 2 has type 'ulong *'
+cmd_mem.c:1237: warning: format '%x' expects type 'unsigned int', but argument 3 has type 'ulong'
+cmd_mem.c:1240: warning: format '%x' expects type 'unsigned int', but argument 2 has type 'ulong *'
+cmd_mem.c:1240: warning: format '%x' expects type 'unsigned int', but argument 3 has type 'ulong'
+cmd_mem.c:1243: warning: format '%x' expects type 'unsigned int', but argument 2 has type 'ulong *'
+cmd_mem.c:1243: warning: format '%x' expects type 'unsigned int', but argument 3 has type 'ulong'
+cmd_mem.c:1246: warning: format '%x' expects type 'unsigned int', but argument 2 has type 'ulong *'
+cmd_mem.c:1246: warning: format '%x' expects type 'unsigned int', but argument 3 has type 'ulong'
+cmd_mem.c:1249: warning: format '%x' expects type 'unsigned int', but argument 2 has type 'ulong *'
+cmd_mem.c:1249: warning: format '%x' expects type 'unsigned int', but argument 3 has type 'ulong'
+cmd_mem.c:1252: warning: format '%x' expects type 'unsigned int', but argument 2 has type 'ulong *'
+cmd_mem.c:1252: warning: format '%x' expects type 'unsigned int', but argument 3 has type 'ulong'
+cmd_mem.c:1259: warning: format '%x' expects type 'unsigned int', but argument 2 has type 'ulong *'
+cmd_mem.c:1259: warning: format '%x' expects type 'unsigned int', but argument 3 has type 'ulong *'
+cmd_mem.c:1275: warning: format '%x' expects type 'unsigned int', but argument 2 has type 'ulong *'
+cmd_mem.c:1210: warning: label 'usage' defined but not used
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_mmc.o cmd_mmc.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_mtdparts.o cmd_mtdparts.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_nand.o cmd_nand.c
+cmd_mtdparts.c: In function 'do_mtdparts':
+cmd_mtdparts.c:1848: warning: label 'usage' defined but not used
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_net.o cmd_net.c
+cmd_nand.c: In function 'arg_off_size':
+cmd_nand.c:128: warning: implicit declaration of function 'mtdparts_init'
+cmd_nand.c:129: warning: implicit declaration of function 'find_dev_and_part'
+cmd_nand.c:136: warning: passing argument 2 of 'str2long' from incompatible pointer type
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_nvedit.o cmd_nvedit.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_pcmcia.o cmd_pcmcia.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_reginfo.o cmd_reginfo.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_ubi.o cmd_ubi.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_usbd.o cmd_usbd.c
+cmd_ubi.c: In function 'ubi_dev_scan':
+cmd_ubi.c:408: warning: implicit declaration of function 'find_dev_and_part'
+cmd_ubi.c: In function 'do_ubi':
+cmd_ubi.c:449: warning: implicit declaration of function 'mtdparts_init'
+cmd_ubi.c:474: warning: implicit declaration of function 'cmd_usage'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_ximg.o cmd_ximg.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_vfd.o cmd_vfd.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o command.o command.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o console.o console.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cyclon2.o cyclon2.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o stratixII.o stratixII.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o devices.o devices.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o dlmalloc.o dlmalloc.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o docecc.o docecc.c
+arm-none-linux-gnueabi-gcc  -D__ASSEMBLY__ -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wa,--no-warn \
+		-DENV_CRC=0 \
+		-c -o environment.o environment.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o env_common.o env_common.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o env_dataflash.o env_dataflash.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o env_flash.o env_flash.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o env_eeprom.o env_eeprom.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o env_sf.o env_sf.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o env_nvram.o env_nvram.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o env_nowhere.o env_nowhere.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o exports.o exports.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o flash.o flash.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o fpga.o fpga.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o hush.o hush.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o kgdb.o kgdb.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o lcd.o lcd.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o lists.o lists.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o lynxkdi.o lynxkdi.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o memsize.o memsize.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o miiphybb.o miiphybb.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o miiphyutil.o miiphyutil.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o s_record.o s_record.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o serial.o serial.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o soft_i2c.o soft_i2c.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o soft_spi.o soft_spi.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o spartan2.o spartan2.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o spartan3.o spartan3.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o usb.o usb.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o usb_kbd.o usb_kbd.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o usb_storage.o usb_storage.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o virtex2.o virtex2.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o xilinx.o xilinx.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o xyzModem.o xyzModem.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_mac.o cmd_mac.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_movi.o cmd_movi.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_android.o cmd_android.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_fastboot.o cmd_fastboot.c
+cmd_movi.c: In function 'do_movi':
+cmd_movi.c:801: warning: implicit declaration of function 'movi_write_bl1'
+cmd_movi.c: In function 'init_raw_area_table':
+cmd_movi.c:620: warning: control reaches end of non-void function
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o cmd_mmc_fdisk.o cmd_mmc_fdisk.c
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o env_auto.o env_auto.c
+cmd_fastboot.c: In function 'rx_handler':
+cmd_fastboot.c:835: warning: unused variable 'length'
+cmd_fastboot.c:835: warning: unused variable 'start'
+cmd_fastboot.c:1076: warning: unused variable 'hdr'
+cmd_fastboot.c: At top level:
+cmd_fastboot.c:1444: warning: function declaration isn't a prototype
+In file included from cmd_fastboot.c:1670:
+/home/jhk/android/mango210/uboot/include/fat.h:195: warning: function declaration isn't a prototype
+cmd_fastboot.c: In function 'update_from_sd':
+cmd_fastboot.c:1720: warning: format '%08x' expects type 'unsigned int', but argument 3 has type 'long int'
+cmd_fastboot.c:1739: warning: pointer targets in passing argument 1 of 'rx_handler' differ in signedness
+cmd_fastboot.c: At top level:
+cmd_fastboot.c:1252: warning: 'add_partition_from_environment' defined but not used
+env_auto.c: In function 'saveenv_nand':
+env_auto.c:216: warning: assignment from incompatible pointer type
+env_auto.c:168: warning: unused variable 'eraselength'
+env_auto.c: In function 'saveenv_movinand':
+env_auto.c:291: warning: implicit declaration of function 'movi_write_env'
+env_auto.c: In function 'env_relocate_spec_nand':
+env_auto.c:486: warning: assignment from incompatible pointer type
+env_auto.c: In function 'env_relocate_spec_movinand':
+env_auto.c:534: warning: implicit declaration of function 'movi_read_env'
+arm-none-linux-gnueabi-ar crv libcommon.a main.o ACEX1K.o altera.o bedbug.o circbuf.o cmd_autoscript.o cmd_bdinfo.o image.o gunzip.o cmd_boot.o cmd_bootm.o cmd_cache.o cmd_console.o cmd_date.o cmd_eeprom.o cmd_elf.o cmd_ext2.o cmd_fat.o cmd_fdc.o cmd_itest.o cmd_load.o cmd_mem.o cmd_misc.o cmd_mmc.o cmd_mtdparts.o cmd_nand.o cmd_net.o cmd_nvedit.o cmd_pcmcia.o cmd_reginfo.o cmd_ubi.o cmd_usbd.o cmd_ximg.o cmd_vfd.o command.o console.o cyclon2.o stratixII.o devices.o dlmalloc.o docecc.o environment.o env_common.o env_dataflash.o env_flash.o env_eeprom.o env_sf.o env_nvram.o env_nowhere.o exports.o flash.o fpga.o hush.o kgdb.o lcd.o lists.o lynxkdi.o memsize.o miiphybb.o miiphyutil.o s_record.o serial.o soft_i2c.o soft_spi.o spartan2.o spartan3.o usb.o usb_kbd.o usb_storage.o virtex2.o xilinx.o crc16.o xyzModem.o cmd_mac.o cmd_movi.o cmd_android.o secure.o ace_sha1.o cmd_fastboot.o cmd_mmc_fdisk.o env_auto.o
+r - main.o
+r - ACEX1K.o
+r - altera.o
+r - bedbug.o
+r - circbuf.o
+r - cmd_autoscript.o
+r - cmd_bdinfo.o
+r - image.o
+r - gunzip.o
+r - cmd_boot.o
+r - cmd_bootm.o
+r - cmd_cache.o
+r - cmd_console.o
+r - cmd_date.o
+r - cmd_eeprom.o
+r - cmd_elf.o
+r - cmd_ext2.o
+r - cmd_fat.o
+r - cmd_fdc.o
+r - cmd_itest.o
+r - cmd_load.o
+r - cmd_mem.o
+r - cmd_misc.o
+r - cmd_mmc.o
+r - cmd_mtdparts.o
+r - cmd_nand.o
+r - cmd_net.o
+r - cmd_nvedit.o
+r - cmd_pcmcia.o
+r - cmd_reginfo.o
+r - cmd_ubi.o
+r - cmd_usbd.o
+r - cmd_ximg.o
+r - cmd_vfd.o
+r - command.o
+r - console.o
+r - cyclon2.o
+r - stratixII.o
+r - devices.o
+r - dlmalloc.o
+r - docecc.o
+r - environment.o
+r - env_common.o
+r - env_dataflash.o
+r - env_flash.o
+r - env_eeprom.o
+r - env_sf.o
+r - env_nvram.o
+r - env_nowhere.o
+r - exports.o
+r - flash.o
+r - fpga.o
+r - hush.o
+r - kgdb.o
+r - lcd.o
+r - lists.o
+r - lynxkdi.o
+r - memsize.o
+r - miiphybb.o
+r - miiphyutil.o
+r - s_record.o
+r - serial.o
+r - soft_i2c.o
+r - soft_spi.o
+r - spartan2.o
+r - spartan3.o
+r - usb.o
+r - usb_kbd.o
+r - usb_storage.o
+r - virtex2.o
+r - xilinx.o
+r - crc16.o
+r - xyzModem.o
+r - cmd_mac.o
+r - cmd_movi.o
+r - cmd_android.o
+r - secure.o
+r - ace_sha1.o
+r - cmd_fastboot.o
+r - cmd_mmc_fdisk.o
+r - env_auto.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/common'
+make -C board/samsung/mango210/
+make[1]: Entering directory `/home/jhk/android/mango210/uboot/board/samsung/mango210'
+arm-none-linux-gnueabi-gcc -g  -Os   -fno-strict-aliasing  -fno-common -ffixed-r8 -msoft-float  -D__KERNEL__ -DTEXT_BASE=0x2fd00000 -I/home/jhk/android/mango210/uboot/include -fno-builtin -ffreestanding -nostdinc -isystem /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2/include -pipe  -DCONFIG_ARM -D__ARM__ -march=armv5te -mabi=apcs-gnu -mno-thumb-interwork -Wall -Wstrict-prototypes -fno-stack-protector -c -o mango210.o mango210.c
+arm-none-linux-gnueabi-ar crv libmango210.a lowlevel_init.o mango210.o
+r - lowlevel_init.o
+r - mango210.o
+make[1]: Leaving directory `/home/jhk/android/mango210/uboot/board/samsung/mango210'
+UNDEF_SYM=`arm-none-linux-gnueabi-objdump -x board/samsung/mango210/libmango210.a lib_generic/libgeneric.a cpu/s5pc11x/libs5pc11x.a cpu/s5pc11x/s5pc110/libs5pc110.a lib_arm/libarm.a fs/cramfs/libcramfs.a fs/fat/libfat.a fs/fdos/libfdos.a fs/jffs2/libjffs2.a fs/reiserfs/libreiserfs.a fs/ext2/libext2fs.a net/libnet.a disk/libdisk.a drivers/bios_emulator/libatibiosemu.a drivers/block/libblock.a drivers/dma/libdma.a drivers/hwmon/libhwmon.a drivers/i2c/libi2c.a drivers/input/libinput.a drivers/misc/libmisc.a drivers/mmc/libmmc.a drivers/mtd/libmtd.a drivers/mtd/nand/libnand.a drivers/mtd/nand_legacy/libnand_legacy.a drivers/mtd/onenand/libonenand.a drivers/mtd/ubi/libubi.a drivers/mtd/spi/libspi_flash.a drivers/net/libnet.a drivers/net/sk98lin/libsk98lin.a drivers/pci/libpci.a drivers/pcmcia/libpcmcia.a drivers/spi/libspi.a drivers/rtc/librtc.a drivers/serial/libserial.a drivers/usb/libusb.a drivers/video/libvideo.a common/libcommon.a libfdt/libfdt.a api/libapi.a post/libpost.a | \
+		sed  -n -e 's/.*\(__u_boot_cmd_.*\)/-u\1/p'|sort|uniq`;\
+		cd /home/jhk/android/mango210/uboot && arm-none-linux-gnueabi-ld -Bstatic -T /home/jhk/android/mango210/uboot/board/samsung/mango210/u-boot.lds  -Ttext 0x2fd00000 $UNDEF_SYM cpu/s5pc11x/start.o \
+			--start-group lib_generic/libgeneric.a cpu/s5pc11x/libs5pc11x.a cpu/s5pc11x/s5pc110/libs5pc110.a lib_arm/libarm.a fs/cramfs/libcramfs.a fs/fat/libfat.a fs/fdos/libfdos.a fs/jffs2/libjffs2.a fs/reiserfs/libreiserfs.a fs/ext2/libext2fs.a net/libnet.a disk/libdisk.a drivers/bios_emulator/libatibiosemu.a drivers/block/libblock.a drivers/dma/libdma.a drivers/hwmon/libhwmon.a drivers/i2c/libi2c.a drivers/input/libinput.a drivers/misc/libmisc.a drivers/mmc/libmmc.a drivers/mtd/libmtd.a drivers/mtd/nand/libnand.a drivers/mtd/nand_legacy/libnand_legacy.a drivers/mtd/onenand/libonenand.a drivers/mtd/ubi/libubi.a drivers/mtd/spi/libspi_flash.a drivers/net/libnet.a drivers/net/sk98lin/libsk98lin.a drivers/pci/libpci.a drivers/pcmcia/libpcmcia.a drivers/spi/libspi.a drivers/rtc/librtc.a drivers/serial/libserial.a drivers/usb/libusb.a drivers/video/libvideo.a common/libcommon.a libfdt/libfdt.a api/libapi.a post/libpost.a board/samsung/mango210/libmango210.a --end-group -L /usr/local/arm/4.3.2/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.2 -lgcc \
+			-Map u-boot.map -o u-boot
+arm-none-linux-gnueabi-objcopy --gap-fill=0xff -O srec u-boot u-boot.srec
+arm-none-linux-gnueabi-objcopy --gap-fill=0xff -O binary u-boot u-boot.bin
+arm-none-linux-gnueabi-objdump -d u-boot > u-boot.dis
+cp -a u-boot.bin ../image/
+cp -a u-boot.bin /home/chongzi/m210_ics404_120703/fastboot_image_ICS/u-boot.bin
+cp: cannot create regular file `/home/chongzi/m210_ics404_120703/fastboot_image_ICS/u-boot.bin': No such file or directory
+Total compile time is 1 minutes 9 seconds
